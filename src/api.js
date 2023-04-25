@@ -1,11 +1,11 @@
 import { API_KEY, BASE_URL } from "./keys";
 import { useEffect, useState } from "react";
 
-const WeatherApi = () => {
+const WeatherApi = ({location}) => {
   const [apiData, setApiData] = useState(null);
 
   useEffect(() => {
-      fetch(`${BASE_URL}forecast?id=524901&appid=${API_KEY}`)
+      fetch(`${BASE_URL}weather?q=${location}&appid=${API_KEY}`)
         .then((res) => res.json())
         .then((data) => {
           setApiData(data);
