@@ -1,29 +1,46 @@
-import { useState } from "react"
 import './App.css';
-import  WeatherApi  from "./api";
+import { API_KEY, BASE_URL } from "./keys";
+import { useEffect, useState } from "react";
+
 
 const InputsAndBtn = () => {
-    const apiDatas = WeatherApi()
-    console.log(apiDatas)
-    const [location, setLocation] = useState("")
-
-    function handleChange(event) {
-        setLocation(event.target.value)
-    }
+    const [location, setLocation] = useState("");
+    const [apiData, setApiData] = useState(null);
+  
     function handleBtn(event) {
-        event.preventDefault()
+      event.preventDefault();
+  
+      fetch(`${BASE_URL}weather?q=${location}&appid=${API_KEY}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setApiData(data);
+          console.log(data);
+        })
+        .catch((error) => console.log(error));
     }
+  
     return (
-        <form className="form">
-            <input 
-            onChange={handleChange}
-            type="text"
-            placeholder="enter a city"
-            >
-            </input>
+      <form className="form">
+        <div style={{ display: "flex" }}>
+          <section style={{ marginRight: "auto" }}>
+            <input
+              onChange={(event) => setLocation(event.target.value)}
+              type="text"
+              placeholder="enter a city"
+              value={location}
+            ></input>
             <button onClick={handleBtn}>Start</button>
-        </form>
-    )
-}
+          </section>
+          {apiData && (
+            <section style={{ backgroundColor: "red", width: "30vw", height: "100vh" }}>
+              <h1>{apiData.clouds.all}</h1>
+              <h2>{apiData.weather[0]["description"]}</h2>
+            </section>
+          )}
+        </div>
+      </form>
+    );
+  };
+    
 
 export default InputsAndBtn
