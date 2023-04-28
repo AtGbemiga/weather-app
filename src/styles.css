@@ -1,0 +1,20 @@
+.App {
+    background: linear-gradient(to right,#1946f6,#df48c7);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  form{
+    display: block;
+    border: "1px solid red"; 
+    width: "fit-content"
+  }
+  
+  .uiSection{
+    background-color: "black"; 
+    width: "30vw";
+    height: "100vh";
+  }

@@ -1,4 +1,4 @@
-import './App.css';
+
 import InputsAndBtn from './inputs';
 
 function App() {
